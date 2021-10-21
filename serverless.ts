@@ -7,10 +7,19 @@ import SingleItem from '@functions/getone';
 import UpdateItem from '@functions/updatadata'
 import DeleteItem from '@functions/deleteitem'
 
+
 const serverlessConfiguration: AWS = {
   service: 'serverless-with-typescirpt',
   frameworkVersion: '2',
   custom: {
+    dynamodb: {
+      stages: ['dev'],
+      start: {
+        port: 8000,
+        migrate: true,
+        seed: true
+      }
+    },
     esbuild: {
       bundle: true,
       minify: false,
@@ -21,7 +30,7 @@ const serverlessConfiguration: AWS = {
       platform: 'node',
     },
   },
-  plugins: ['serverless-esbuild', 'serverless-offline'],
+  plugins: ['serverless-esbuild', 'serverless-offline', 'serverless-dynamodb-local'],
   provider: {
     name: 'aws',
     runtime: 'nodejs14.x',

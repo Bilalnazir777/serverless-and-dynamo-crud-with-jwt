@@ -2,7 +2,10 @@
 
 const AWS = require('aws-sdk')
 
-const dynamodb = new AWS.DynamoDB.DocumentClient()
+const dynamodb = new AWS.DynamoDB.DocumentClient({
+    region: "localhost",
+    endpoint: "http://localhost:8000"
+})
 //saving data to database
 export const save = async (NewData) => {
     const DataToAdd = await dynamodb.put({

@@ -6,6 +6,8 @@ import GetList from '@functions/getdatalist';
 import SingleItem from '@functions/getone';
 import UpdateItem from '@functions/updatadata'
 import DeleteItem from '@functions/deleteitem'
+import { simpleauth } from '@functions/index'
+import { simpleauthorization } from '@functions/index'
 
 
 const serverlessConfiguration: AWS = {
@@ -76,7 +78,7 @@ const serverlessConfiguration: AWS = {
 
   },
   // import the function via paths
-  functions: { hello, AddData, GetList, SingleItem, DeleteItem, UpdateItem },
+  functions: { hello, AddData, GetList, SingleItem, DeleteItem, UpdateItem, simpleauth, simpleauthorization },
 };
 
 module.exports = serverlessConfiguration;

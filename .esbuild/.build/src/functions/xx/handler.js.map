@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../src/functions/xx/handler.ts"],
+  "sourcesContent": ["import { Handler } from \"aws-lambda\";\r\n\r\nexport const simpleauth: Handler = async (event) => {\r\n    // console.log('dsdsd')/\r\n    return {\r\n        principalId: \"bilalnazir\",\r\n        policyDocument: {\r\n            Version: \"2012-10-17\",\r\n            Statement: [\r\n                {\r\n                    Resource: [\"*\"],\r\n                    Effect: \"Allow\",\r\n                    Action: \"execute-api:Invoke\"\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}"],
+  "mappings": ";;;;;;;;;AAAA;AAAA;AAAA;AAEO,IAAM,aAAsB,OAAO,UAAU;AAEhD,SAAO;AAAA,IACH,aAAa;AAAA,IACb,gBAAgB;AAAA,MACZ,SAAS;AAAA,MACT,WAAW;AAAA,QACP;AAAA,UACI,UAAU,CAAC;AAAA,UACX,QAAQ;AAAA,UACR,QAAQ;AAAA;AAAA;AAAA;AAAA;AAAA;",
+  "names": []
+}

@@ -1,3 +1,5 @@
+export { simpleauth } from './validation';
+export { simpleauthorization } from './authorizing'
 export { default as hello } from './hello';
 export { default as AddData } from './adddata';
 export { default as GetList } from './getdatalist';

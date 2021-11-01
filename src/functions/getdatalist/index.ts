@@ -7,7 +7,7 @@ export default {
       http: {
         method: 'get',
         path: 'getdatalist',
-
+        authorizer: 'simpleauth'
       }
     }
   ]

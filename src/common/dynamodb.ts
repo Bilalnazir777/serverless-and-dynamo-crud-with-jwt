@@ -1,5 +1,5 @@
 
-
+const jwt = require('jsonwebtoken')
 const AWS = require('aws-sdk')
 
 const dynamodb = new AWS.DynamoDB.DocumentClient({
@@ -58,3 +58,26 @@ export const UpdateName = async (NewData) => {
     }).promise()
     return DataToAdd;
 }
+
+
+//authentication :signing token
+
+export const simpleauth = async (user: any) => {
+
+    const authuser = await dynamodb.scan(
+        {
+            TableName: 'TypescriptTable',
+            Key: { Customername: user.customername }
+
+        }).promise()
+    if (authuser) {
+
+        return {
+            Token: jwt.sign(JSON.stringify(authuser), "bilalnazir")
+        }
+    } else {
+        throw new Error("no customer found in database");
+    }
+}
+
+

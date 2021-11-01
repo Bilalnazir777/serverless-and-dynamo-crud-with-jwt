@@ -4026,7 +4026,7 @@ var require_jsonwebtoken = __commonJS({
   }
 });
 
-// src/functions/deleteitem/handler.ts
+// src/functions/authorizing/handler.ts
 __export(exports, {
   main: () => main
 });
@@ -4053,23 +4053,30 @@ var dynamodb = new AWS.DynamoDB.DocumentClient({
   region: "localhost",
   endpoint: "http://localhost:8000"
 });
-var DeleteOne = async (id) => {
-  const DeleteItem2 = await dynamodb.delete({
+var simpleauth = async (user) => {
+  const authuser = await dynamodb.scan({
     TableName: "TypescriptTable",
-    Key: { id }
+    Key: { Customername: user.customername }
   }).promise();
-  return DeleteItem2;
+  if (authuser) {
+    return {
+      Token: jwt.sign(JSON.stringify(authuser), "bilalnazir")
+    };
+  } else {
+    throw new Error("no customer found in database");
+  }
 };
 
-// src/functions/deleteitem/handler.ts
-var DeleteItem = async (event) => {
-  const { id } = event.queryStringParameters;
-  await DeleteOne(id);
+// src/functions/authorizing/handler.ts
+var authorization = async (event) => {
+  const Customername = event.body;
+  const token = await simpleauth(Customername);
   return formatJSONResponse({
-    Message: "item deleted succesfully"
+    Tokengenerated: token,
+    Message: "token issued"
   });
 };
-var main = middyfy(DeleteItem);
+var main = middyfy(authorization);
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   main

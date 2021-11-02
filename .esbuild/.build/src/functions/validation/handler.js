@@ -2829,8 +2829,9 @@ __export(exports, {
 });
 var jwt = require_jsonwebtoken();
 var verifier = async (event) => {
-  const bearerheader = event["authorization"];
-  if (bearerheader != void 0) {
+  console.log(event);
+  const bearerheader = event["authorizationToken"];
+  if (bearerheader != "" || bearerheader != void 0) {
     var bearer = bearerheader.split(" ");
     const bearertoken = bearer[1];
     const decoded = jwt.verify(bearertoken, "bilalnazir");
@@ -2856,7 +2857,7 @@ var verifier = async (event) => {
         Statement: [
           {
             Resource: ["*"],
-            Effect: "Allow",
+            Effect: "Deny",
             Action: "execute-api:Invoke"
           }
         ]
